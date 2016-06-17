@@ -5,4 +5,4 @@ Sistema exemplo a ser trabalhado nas aulas da disciplina de Arquitetura de Softw
 ## Configuração de Ambiente
 
 - Eclipse "Mars" para desenvolvedores JEE - http://www.eclipse.org/downloads/packages/eclipse-ide-java-ee-developers/marsr
-- Tomcat 8.5.3 - http://tomcat.apache.org/download-80.cgi#8.5.3
+- Tomcat 8.0.36 - https://tomcat.apache.org/download-80.cgi#8.0.36
