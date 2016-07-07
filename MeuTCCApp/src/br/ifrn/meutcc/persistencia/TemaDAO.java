@@ -40,7 +40,29 @@ public class TemaDAO {
 		}
 		return null;
 	}
-
+	
+	public Tema getTema(int idTema) {
+		verificaConexao();
+		if (conn != null) {
+			try {
+				Statement stListaTema = conn.createStatement();
+				ResultSet rsTemas = stListaTema.executeQuery("SELECT * FROM Tema as t WHERE t.id = "+idTema);
+				Tema tema = null;
+				if (rsTemas.next()) {
+					tema = new Tema();
+					tema.setId(rsTemas.getInt("id"));
+					tema.setTitulo(rsTemas.getString("titulo"));
+					tema.setDescricao(rsTemas.getString("descricao"));
+		
+				}
+				return tema;
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		return null;
+	}
+	
 	private void verificaConexao() {
 		String 	url = "jdbc:mysql://localhost/meutcc",
 				nome = "root",

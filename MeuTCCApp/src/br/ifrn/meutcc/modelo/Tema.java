@@ -34,4 +34,7 @@ public class Tema {
 	public List<Tema> listTemas(int idCurso) {
 		return dao.listTemas(idCurso);
 	}
+	public Tema getTema(int idTema) {
+		return dao.getTema(idTema);
+	}
 }

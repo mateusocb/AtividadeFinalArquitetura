@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Temas de TCC</title>
+<title>Meu TCC</title>
 </head>
 <body>
 <h1>Listagem dos Temas Disponíveis para TCC</h1>

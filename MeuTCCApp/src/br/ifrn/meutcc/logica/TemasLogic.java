@@ -14,4 +14,8 @@ public class TemasLogic {
 	public List<Tema> listTemas(int idCurso) {
 		return tema.listTemas(idCurso);
 	}
+
+	public Tema getTema(int idTema) {
+		return tema.getTema(idTema);
+	}
 }
