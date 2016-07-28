@@ -8,7 +8,6 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import br.ifrn.meutcc.logica.TemasLogic;
 import br.ifrn.meutcc.modelo.Tema;
 
 @WebServlet("/ViewTema")
@@ -29,8 +28,8 @@ public class ViewTema extends HttpServlet {
 		} catch (NumberFormatException nfex) {
 			nfex.printStackTrace();
 		}
-		TemasLogic logic = new TemasLogic();
-		Tema tema = logic.getTema(idTema);
+		Tema model = new Tema();
+		Tema tema = model.getTema(idTema);
 		request.setAttribute("tema", tema);
 		request.getRequestDispatcher("viewTema.jsp").forward(request, response);
 	}
