@@ -8,7 +8,7 @@ public class ConexaoMySQL {
 	private final String MySQLDriver = "com.mysql.jdbc.Driver";
 	private final String url = "jdbc:mysql://localhost/meutcc";
 	private final String nome = "root";
-	private final String senha = "senha!123";
+	private final String senha = "senha123";
 	
 	private Connection conn = null;
 	

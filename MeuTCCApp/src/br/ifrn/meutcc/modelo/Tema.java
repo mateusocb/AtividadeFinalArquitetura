@@ -10,6 +10,8 @@ public class Tema {
 	private String titulo;
 	private String descricao;
 	private TemaDAO dao;
+	private List<Candidato> listaCandidato;
+	
 	public Tema() {
 		super();
 		dao = FabricaDAO.getInstancia("mysql").createTemaDAO();
@@ -37,5 +39,14 @@ public class Tema {
 	}
 	public Tema getTema(int idTema) {
 		return dao.getTema(idTema);
+	}
+	public List<Tema> listTemasDoOrientador(int idCurso, int idOrientador) {
+		return dao.listTemasDoOrientador(idCurso, idOrientador);
+	}
+	public List<Candidato> getListaCandidato() {
+		return listaCandidato;
+	}
+	public List<Candidato> setlistaCandidato(int idTema) {
+		return dao.atualizaListCandidatoTema(idTema);
 	}
 }

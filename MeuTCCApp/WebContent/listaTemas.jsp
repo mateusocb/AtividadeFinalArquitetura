@@ -10,11 +10,19 @@
 <h1>Listagem dos Temas Disponíveis para TCC</h1>
 <ol>
 <%
+	boolean verificar=false;
+	if(request.getAttribute("verificador")!=null)
+		verificar=(boolean)request.getAttribute("verificador");
 	List<Tema> temas = (List<Tema>) request.getAttribute("temas");
 	if (temas != null && !temas.isEmpty()) {
 		for(Tema t: temas) {
-			out.println("<li><a href=\"/MeuTCC/ViewTema?id="+t.getId()+
+			if(verificar==false){
+				out.println("<li><a href=\"/MeuTCC/ViewTema?id="+t.getId()+
 							"\">["+t.getId()+"] "+t.getTitulo()+"</a>.</li>");
+			}else{
+				out.println("<li><a href=\"/MeuTCC/ViewTemaSolicitacoes?id="+t.getId()+
+						"\">["+t.getId()+"] "+t.getTitulo()+"</a>.</li>");
+			}
 		}
 	} else {
 		out.println("<li>Nenhum tema cadastrado para o referido curso!</li>");

@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import br.ifrn.meutcc.modelo.Tema;
+import br.ifrn.meutcc.modelo.Candidato;
 
 public class TemaDAOMySQL implements TemaDAO {
 	private static TemaDAOMySQL instancia = null;
@@ -65,6 +66,51 @@ public class TemaDAOMySQL implements TemaDAO {
 			} catch (SQLException e) {
 				e.printStackTrace();
 			}
+		}
+		return null;
+	}
+	
+	public List<Tema> listTemasDoOrientador(int idCurso, int idOrientador) {
+		Connection conn = conexao.getConexaoBD();
+		if (conn != null) {
+			try {
+				Statement stListaTema = conn.createStatement();
+				ResultSet rsTemas = stListaTema.executeQuery("SELECT * FROM Tema as t WHERE t.idCurso = "+idCurso+" and t.idOrientador="+idOrientador);
+				List<Tema> temas = new ArrayList<Tema>();
+				while (rsTemas.next()) {
+					Tema tema = new Tema();
+					tema.setId(rsTemas.getInt("id"));
+					tema.setTitulo(rsTemas.getString("titulo"));
+					tema.setDescricao(rsTemas.getString("descricao"));
+					temas.add(tema);
+				}
+				return temas;
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+			
+		}
+		return null;
+	}
+	
+	public List<Candidato> atualizaListCandidatoTema(int idTema) {
+		Connection conn = conexao.getConexaoBD();
+		if (conn != null) {
+			try {
+				Statement stListaTema = conn.createStatement();
+				ResultSet rsTemas = stListaTema.executeQuery("SELECT * FROM Candidato as c inner join TemaCandidato as tc on c.id = tc.idcandidato WHERE tc.idTema = "+idTema);
+				List<Candidato> candidatos = new ArrayList<Candidato>();
+				while (rsTemas.next()) {
+					Candidato candidato = new Candidato();
+					candidato.setId(rsTemas.getInt("id"));
+					candidato.setNome(rsTemas.getString("name"));
+					candidatos.add(candidato);
+				}
+				return candidatos;
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+			
 		}
 		return null;
 	}
