@@ -7,12 +7,16 @@
 <title>Meu TCC</title>
 </head>
 <body>
-<h1>Listagem dos Temas Disponíveis para TCC</h1>
-<ol>
+
 <%
 	boolean verificar=false;
-	if(request.getAttribute("verificador")!=null)
-		verificar=(boolean)request.getAttribute("verificador");
+	if(request.getAttribute("solicitacao")!=null){
+		out.println("<h1>Listagem dos Temas referentes ao Orientador</h1>");
+		verificar=(boolean)request.getAttribute("solicitacao");
+	}else{
+		out.println("<h1>Listagem dos Temas Disponíveis para TCC</h1>");
+	}
+	out.println("<ol>");
 	List<Tema> temas = (List<Tema>) request.getAttribute("temas");
 	if (temas != null && !temas.isEmpty()) {
 		for(Tema t: temas) {
@@ -27,7 +31,7 @@
 	} else {
 		out.println("<li>Nenhum tema cadastrado para o referido curso!</li>");
 	}
+	out.println("</ol>");
 %>
-</ol>
 </body>
 </html>

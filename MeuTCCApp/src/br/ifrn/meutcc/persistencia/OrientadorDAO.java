@@ -1,5 +1,8 @@
 package br.ifrn.meutcc.persistencia;
 
-public class OrientadorDAO {
+import br.ifrn.meutcc.modelo.Orientador;
 
+public interface OrientadorDAO {
+	public Orientador getOrientador(int idOrientador);
+	public int setQtdAtual(int idOrientador);
 }

@@ -47,6 +47,16 @@ public class Tema {
 		return listaCandidato;
 	}
 	public List<Candidato> setlistaCandidato(int idTema) {
-		return dao.atualizaListCandidatoTema(idTema);
+		listaCandidato=dao.atualizaListCandidatoTema(idTema);
+		return listaCandidato;
+	}
+	public void setDisponibilidade(int idCandidato) {
+		dao.setDisponibilidade(this.id, idCandidato);
+	}
+	public void setAVerificar(int idCandidato) {
+		dao.setAVerificar(this.id, idCandidato);
+	}
+	public void setVerificado(boolean resultado) {
+		dao.setVerificado(this.id, resultado);
 	}
 }

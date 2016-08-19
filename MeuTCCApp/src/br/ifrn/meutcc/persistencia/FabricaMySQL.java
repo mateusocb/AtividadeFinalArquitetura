@@ -19,14 +19,18 @@ public class FabricaMySQL extends FabricaDAO {
 		return TemaDAOMySQL.getInstancia();
 	}
 
-	@Override
-	public CandidatoDAO createCadidatoDAO() {
-		// TODO Auto-generated method stub
-		return null;
-	}
+	//@Override
+	//public CandidatoDAO createCadidatoDAO() {
+		//return CandidatoDAOMySQL.getInstancia();
+	//}
 
 	@Override
 	public OrientadorDAO createOrientadorDAO() {
+		return OrientadorDAOMySQL.getInstancia();
+	}
+
+	@Override
+	public CandidatoDAO createCadidatoDAO() {
 		// TODO Auto-generated method stub
 		return null;
 	}

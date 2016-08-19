@@ -7,6 +7,8 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.mysql.jdbc.PreparedStatement;
+
 import br.ifrn.meutcc.modelo.Tema;
 import br.ifrn.meutcc.modelo.Candidato;
 
@@ -98,11 +100,12 @@ public class TemaDAOMySQL implements TemaDAO {
 		if (conn != null) {
 			try {
 				Statement stListaTema = conn.createStatement();
-				ResultSet rsTemas = stListaTema.executeQuery("SELECT * FROM Candidato as c inner join TemaCandidato as tc on c.id = tc.idcandidato WHERE tc.idTema = "+idTema);
+				ResultSet rsTemas = stListaTema.executeQuery("SELECT distinct c.* FROM candidato as c inner join TemaCandidato as tc on c.idCandidato = tc.idCandidato WHERE tc.idTema = "+idTema);
 				List<Candidato> candidatos = new ArrayList<Candidato>();
+				System.out.println("passou");
 				while (rsTemas.next()) {
 					Candidato candidato = new Candidato();
-					candidato.setId(rsTemas.getInt("id"));
+					candidato.setId(rsTemas.getInt("idCandidato"));
 					candidato.setNome(rsTemas.getString("name"));
 					candidatos.add(candidato);
 				}
@@ -115,4 +118,44 @@ public class TemaDAOMySQL implements TemaDAO {
 		return null;
 	}
 
+	@Override
+	public void setDisponibilidade(int id, int idCandidato) {
+		Connection conn = conexao.getConexaoBD();
+		if (conn != null) {
+			try {
+				PreparedStatement updateEXP = (PreparedStatement) conn.prepareStatement("UPDATE TEMA SET disponibilidade = 0, idAluno = "+ idCandidato + " WHERE id=" + id);
+				updateEXP.executeUpdate();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+	}
+	public void setAVerificar(int id, int idCandidato) {
+		Connection conn = conexao.getConexaoBD();
+		if (conn != null) {
+			try {
+				PreparedStatement updateEXP = (PreparedStatement) conn.prepareStatement("UPDATE TEMA SET averificar = 1, idAluno = "+ idCandidato + " WHERE id=" + id);
+				updateEXP.executeUpdate();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+	}
+	
+	public void setVerificado(int id, boolean resultado) {
+		Connection conn = conexao.getConexaoBD();
+		if (conn != null) {
+			try {
+				if (resultado) {
+					PreparedStatement updateEXP = (PreparedStatement) conn.prepareStatement("UPDATE TEMA SET averificar = 0, disponibilidade = 0 WHERE id=" + id);
+					updateEXP.executeUpdate();
+				} else {
+					PreparedStatement updateEXP = (PreparedStatement) conn.prepareStatement("UPDATE TEMA SET averificar = 0, idAluno = null WHERE id=" + id);
+					updateEXP.executeUpdate();
+				}
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+	}
 }

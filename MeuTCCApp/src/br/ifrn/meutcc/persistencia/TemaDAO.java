@@ -10,4 +10,7 @@ public interface TemaDAO {
 	public Tema getTema(int idTema);
 	public List<Tema> listTemasDoOrientador(int idCurso, int idOrientador);
 	public List<Candidato> atualizaListCandidatoTema(int idTema);
+	public void setDisponibilidade(int id, int idCandidato);
+	public void setVerificado(int id, boolean resultado);
+	public void setAVerificar(int id, int idCandidato);
 }
