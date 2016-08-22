@@ -59,4 +59,15 @@ public class Tema {
 	public void setVerificado(boolean resultado) {
 		dao.setVerificado(this.id, resultado);
 	}
+	public Orientador getOrientador() {
+		return dao.getOrientador(this.id);
+	}
+	public Candidato getCandidato() {
+		return dao.getCandidato(this.id);
+	}
+	
+	public List<Tema> getTemasAVerificar(int idCurso) {
+		return dao.listTemasAVerificar(idCurso);
+	}
+	
 }

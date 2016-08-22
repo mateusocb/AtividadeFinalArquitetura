@@ -3,6 +3,7 @@ package br.ifrn.meutcc.persistencia;
 import java.util.List;
 
 import br.ifrn.meutcc.modelo.Candidato;
+import br.ifrn.meutcc.modelo.Orientador;
 import br.ifrn.meutcc.modelo.Tema;
 
 public interface TemaDAO {
@@ -13,4 +14,7 @@ public interface TemaDAO {
 	public void setDisponibilidade(int id, int idCandidato);
 	public void setVerificado(int id, boolean resultado);
 	public void setAVerificar(int id, int idCandidato);
+	public Candidato getCandidato(int idTema);
+	public Orientador getOrientador(int idTema);
+	public List<Tema> listTemasAVerificar(int idCurso);
 }

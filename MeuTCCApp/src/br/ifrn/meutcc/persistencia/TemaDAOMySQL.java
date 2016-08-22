@@ -11,6 +11,7 @@ import com.mysql.jdbc.PreparedStatement;
 
 import br.ifrn.meutcc.modelo.Tema;
 import br.ifrn.meutcc.modelo.Candidato;
+import br.ifrn.meutcc.modelo.Orientador;
 
 public class TemaDAOMySQL implements TemaDAO {
 	private static TemaDAOMySQL instancia = null;
@@ -149,6 +150,8 @@ public class TemaDAOMySQL implements TemaDAO {
 				if (resultado) {
 					PreparedStatement updateEXP = (PreparedStatement) conn.prepareStatement("UPDATE TEMA SET averificar = 0, disponibilidade = 0 WHERE id=" + id);
 					updateEXP.executeUpdate();
+					PreparedStatement updateEXP1 = (PreparedStatement) conn.prepareStatement("delete from temacandidato where idTema="+id);
+					updateEXP1.executeUpdate();
 				} else {
 					PreparedStatement updateEXP = (PreparedStatement) conn.prepareStatement("UPDATE TEMA SET averificar = 0, idAluno = null WHERE id=" + id);
 					updateEXP.executeUpdate();
@@ -157,5 +160,65 @@ public class TemaDAOMySQL implements TemaDAO {
 				e.printStackTrace();
 			}
 		}
+	}
+
+	@Override
+	public Candidato getCandidato(int idTema) {
+		Connection conn = conexao.getConexaoBD();
+		if (conn != null) {
+			try {
+				Candidato candidato = new Candidato();
+				Statement stListaTema = conn.createStatement();
+				ResultSet rsTemas = stListaTema.executeQuery("SELECT idAluno FROM Tema WHERE id = " + idTema);
+				while (rsTemas.next()) {
+					candidato = candidato.getCandidato(rsTemas.getInt("idAluno"));
+				}
+				return candidato;
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		return null;
+	}
+
+	@Override
+	public Orientador getOrientador(int idTema) {
+		Connection conn = conexao.getConexaoBD();
+		if (conn != null) {
+			try {
+				Orientador orientador = new Orientador();
+				Statement stListaTema = conn.createStatement();
+				ResultSet rsTemas = stListaTema.executeQuery("SELECT idOrientador FROM Tema WHERE id = " + idTema);
+				while (rsTemas.next()) {
+					orientador = orientador.getOrientador(rsTemas.getInt("idOrientador"));
+				}
+				return orientador;
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		return null;
+	}
+
+	@Override
+	public List<Tema> listTemasAVerificar(int idCurso) {
+		Connection conn = conexao.getConexaoBD();
+		if (conn != null) {
+			try {
+				Statement stListaTema = conn.createStatement();
+				ResultSet rsTemas = stListaTema.executeQuery("SELECT * FROM Tema WHERE Tema.aVerificar = 1 AND Tema.idCurso = "+idCurso);
+				List<Tema> temasAVerificar = new ArrayList<Tema>();
+				System.out.println("passou");
+				while (rsTemas.next()) {
+					Tema tema = new Tema();
+					tema = this.getTema(rsTemas.getInt("id"));
+					temasAVerificar.add(tema);
+				}
+				return temasAVerificar;
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		return null;
 	}
 }

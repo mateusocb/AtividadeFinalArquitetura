@@ -1,5 +1,7 @@
 package br.ifrn.meutcc.persistencia;
 
-public class CandidatoDAO {
+import br.ifrn.meutcc.modelo.Candidato;
 
+public interface CandidatoDAO {
+	public Candidato getCandidato(int idCandidato);
 }
