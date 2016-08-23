@@ -15,9 +15,6 @@ import br.ifrn.meutcc.modelo.Tema;
 
 @WebServlet("/ConfirmarSolicitacao")
 public class ConfirmarSolicitacao extends HttpServlet {
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 1L;
 	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

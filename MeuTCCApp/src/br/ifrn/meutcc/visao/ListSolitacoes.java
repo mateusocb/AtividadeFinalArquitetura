@@ -35,6 +35,7 @@ public class ListSolitacoes extends HttpServlet {
 		Tema modelo = new Tema();
 		Orientador modeloOrientador = new Orientador();
 		modeloOrientador = modeloOrientador.getOrientador(idOrientador);
+		modeloOrientador.setQtdAtual(idOrientador);
 		List<Tema> temas = modelo.listTemasDoOrientador(idCurso,idOrientador);
 		HttpSession sessao = request.getSession();
 		sessao.setAttribute("orientador", modeloOrientador);

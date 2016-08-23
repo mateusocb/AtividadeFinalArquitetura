@@ -20,8 +20,7 @@ public class ViewTemaSolicitacoes extends HttpServlet {
 		super();
 	}
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// Recuperar o identificador do curso
-		String tema = request.getParameter("idTema");
+		String tema = request.getParameter("id");
 		int idTema = 1;
 		try {
 			idTema = Integer.parseInt(tema);

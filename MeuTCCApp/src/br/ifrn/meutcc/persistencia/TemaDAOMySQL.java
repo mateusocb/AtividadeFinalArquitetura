@@ -126,6 +126,10 @@ public class TemaDAOMySQL implements TemaDAO {
 			try {
 				PreparedStatement updateEXP = (PreparedStatement) conn.prepareStatement("UPDATE TEMA SET disponibilidade = 0, idAluno = "+ idCandidato + " WHERE id=" + id);
 				updateEXP.executeUpdate();
+				PreparedStatement updateEXP1 = (PreparedStatement) conn.prepareStatement("delete from temacandidato where idTema="+id);
+				updateEXP1.executeUpdate();
+				PreparedStatement updateEXP2 = (PreparedStatement) conn.prepareStatement("delete from temacandidato where idCandidato="+idCandidato);
+				updateEXP2.executeUpdate();
 			} catch (SQLException e) {
 				e.printStackTrace();
 			}

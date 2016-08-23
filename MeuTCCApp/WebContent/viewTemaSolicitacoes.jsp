@@ -21,7 +21,6 @@
 	} else {
 		out.println("<h3>Não há nenhum tema para mostrar!</h3>");
 	}
-	out.println(candidatos);
 	if (candidatos != null && !candidatos.isEmpty()) {
 		out.println("<form ACTION=\"/MeuTCC/ConfirmarSolicitacao\" method=\"post\">");
 		for(Candidato c: candidatos) {

@@ -18,9 +18,7 @@ public class ViewTema extends HttpServlet {
 		super();
 	}
 
-
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// Recuperar o id do tema
 		String id = request.getParameter("id");
 		int idTema = -1;
 		try {
@@ -33,5 +31,4 @@ public class ViewTema extends HttpServlet {
 		request.setAttribute("tema", tema);
 		request.getRequestDispatcher("viewTema.jsp").forward(request, response);
 	}
-
 }
